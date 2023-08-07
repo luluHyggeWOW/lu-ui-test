@@ -57,22 +57,25 @@
       <lu-button type="danger" plain circle icon="check"></lu-button>
     </div>
   </div> -->
-  <div class="dialog">
+  <!-- <div class="dialog">
     <lu-button @click="dialogVisible = true">dialog</lu-button>
-    <lu-dialog :visible=dialogVisible width="40%" title="博鳌日你" @close="handleClose">
-      <!-- <template #title>
-        <h3>我是标题</h3>
-      </template> -->
-      111
+    <lu-dialog :visible="dialogVisible" width="40%" title="111" top="20px" @close="handleClose">
+      222
       <template #footer>
       </template>
     </lu-dialog>
+  </div> -->
+  <div class="input">
+    <lu-input placeholder="请输入用户名" type="password" disabled></lu-input>
+    <lu-input v-model="text" width="20%" clearable> </lu-input>
+    <lu-input v-model="text" width="20%" type="password" show-password> </lu-input>{{text}}
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 let dialogVisible = ref(false);
+let text = ref("");
 const handleClose = (val: boolean) => {
   dialogVisible.value = val;
 };

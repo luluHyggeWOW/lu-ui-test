@@ -1,51 +1,54 @@
 <template>
-  <div class="lu-dialog_wrapper" v-show="visible" @click.self="handleClose">
-    <div class="lu-dialog" :style="{width:width,marginTop:top}">
-      <div class="lu-dialog_header">
-        <slot name="title">
-          <span class="lu-dialog_title">{{title}}</span>
-        </slot>
-        <button class="lu-dialog_headerbtn" @click="handleClose">
-          <i class="lu-icon-close"></i>
-        </button>
-      </div>
-      <div class="lu-dialog_body">
-        <slot><span></span></slot>
-      </div>
-      <div class="lu-dialog_footer">
-        <slot name="footer" v-if="$slots.footer">
-          <lu-button @click="handleClose">取消</lu-button>
-          <lu-button type="primary" @click="handleClose">确定</lu-button>
-        </slot>
+  <transition name="dialog-fade">
+    <div class="lu-dialog_wrapper" v-show="props.visible" @click.self="handleClose">
+      <div class="lu-dialog" :style="{width:width,marginTop:top}">
+        <div class=" lu-dialog_header">
+          <slot name="title">
+            <span class="lu-dialog_title">{{title}}</span>
+          </slot>
+          <button class="lu-dialog_headerbtn" @click="handleClose">
+            <i class="lu-icon-close"></i>
+          </button>
+        </div>
+        <div class="lu-dialog_body">
+          <slot><span></span></slot>
+        </div>
+        <div class="lu-dialog_footer">
+          <slot name="footer" v-if="$slots.footer">
+            <lu-button @click="handleClose">取消</lu-button>
+            <lu-button type="primary" @click="handleClose">确定</lu-button>
+          </slot>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, useSlots, defineProps } from "vue";
+import { onMounted, ref, defineProps, defineEmits } from "vue";
+let visible = ref<boolean>(false);
 const props = defineProps<{
   title?: {
-    type: string; // 修改为对象类型
+    type: String; // 修改为对象类型
     default: "提示";
   };
   width?: {
-    type: string;
+    type: String;
     default: "35%";
   };
   top?: {
-    type: string;
+    type: String;
     default: "15vh";
   };
   visible?: {
-    type: boolean;
+    type: Boolean;
     default: "false";
   };
 }>();
-const emit = defineEmits(["close"]);
+const emits = defineEmits(["close"]);
 
 const handleClose = () => {
-  emit("close", false);
+  emits("close", false);
 };
 </script>
 <script lang="ts">

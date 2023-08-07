@@ -48,6 +48,7 @@ export default {
   margin: 0;
   transition: 0.1s;
   font-weight: 500;
+  // transform: scale(1, 1.1);
   //禁止元素的文字被选中
   -moz-user-select: none;
   -webkit-user-select: none;
