@@ -27,24 +27,24 @@
 <script setup lang="ts">
 import { onMounted, ref, defineProps, defineEmits } from "vue";
 let visible = ref<boolean>(false);
-const props = defineProps<{
-  title?: {
-    type: String; // 修改为对象类型
-    default: "提示";
-  };
-  width?: {
-    type: String;
-    default: "35%";
-  };
-  top?: {
-    type: String;
-    default: "15vh";
-  };
-  visible?: {
-    type: Boolean;
-    default: "false";
-  };
-}>();
+const props = defineProps({
+  title: {
+    type: String, // 修改为对象类型
+    default: "提示",
+  },
+  width: {
+    type: String,
+    default: "35%",
+  },
+  top: {
+    type: String,
+    default: "15vh",
+  },
+  visible: {
+    type: Boolean,
+    default: "false",
+  },
+});
 const emits = defineEmits(["close"]);
 
 const handleClose = () => {

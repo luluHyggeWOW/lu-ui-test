@@ -11,14 +11,14 @@
 
 <script setup lang="ts">
 import { onMounted, ref, useSlots, defineProps } from "vue";
-const props = defineProps<{
-  type?: string;
-  disabled?: boolean;
-  plain?: boolean;
-  round?: boolean;
-  circle?: boolean;
-  icon?: string;
-}>();
+const props = defineProps({
+  type: String,
+  disabled: Boolean,
+  plain: Boolean,
+  round: Boolean,
+  circle: Boolean,
+  icon: String,
+});
 
 const { slots } = useSlots();
 const emit = defineEmits(["click"]);

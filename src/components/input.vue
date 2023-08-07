@@ -1,10 +1,10 @@
 <template>
-  <div class="lu-input  ">
-    <input :type="type" :placeholder="placeholder" :disabled="disabled" :name="name" class="lu-input_inner"
-      :style="{width:width}" :modelValue="modelValue" @input="handleInput"
-      :class="[{'is-disabled':disabled==''||disabled==true?true:false}]">
-    <span class="lu-input_suffix">
-      <i class="on-input_icon lu-icon-cancel" v-if="clearable && value" @click="clear"></i>
+  <div class="lu-input lu-input_suffix" :class="{'lu-input_suffix':showSuffix}" :style="{width:width}">
+    <input :type="showPassword?(passwordVisible?'text':'password'):type" :placeholder="placeholder" :disabled="disabled"
+      :name="name" class="lu-input_inner" :modelValue="modelValue" @input="handleInput($event)"
+      :class="[{'is-disabled':disabled}]">
+    <span class="lu-input_suffix" v-if="showSuffix">
+      <i class="on-input_icon lu-icon-cancel" v-if="clearable && modelValue" @click.stop="clear($event)"></i>
       <i class="on-input_icon lu-icon-visible" v-if="showPassword && type=='password'" @click="handlePassword"></i>
     </span>
   </div>
@@ -13,44 +13,57 @@
 <script setup lang="ts">
 import { onMounted, ref, defineProps, defineEmits } from "vue";
 let visible = ref<boolean>(false);
-const props = defineProps<{
-  placeholder?: {
-    type: String;
-    default: "";
-  };
-  type?: {
-    type: String;
-    default: "text";
-  };
-  name?: {
-    type: String;
-    default: "";
-  };
-  disabled?: {
-    type: Boolean;
-    default: false;
-  };
-  modelValue?: {
-    type: String;
-    default: "";
-  };
-  width?: {
-    type: String;
-    default: "100%";
-  };
-  showPassword?: {
-    type: Boolean;
-    default: false;
-  };
-  clearable?: {
-    type: Boolean;
-    default: false;
-  };
-}>();
-// const prop = defineProps(["modelValue"]);
+const props = defineProps({
+  placeholder: {
+    type: String,
+    default: "",
+  },
+  type: {
+    type: String,
+    default: "text",
+  },
+  name: {
+    type: String,
+    default: "",
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  modelValue: {
+    type: String,
+    default: "",
+  },
+  width: {
+    type: String,
+    default: "100%",
+  },
+  showPassword: {
+    type: Boolean,
+    default: false,
+  },
+  clearable: {
+    type: Boolean,
+    default: false,
+  },
+});
 const emits = defineEmits(["update:modelValue"]);
+let inputText = ref();
+let passwordVisible = ref(false);
 const handleInput = (e: any) => {
+  inputText.value = e;
   emits("update:modelValue", e.target.value);
+};
+const showSuffix = () => {
+  return props.clearable || props.showPassword;
+};
+const clear = (e: any) => {
+  inputText.value.target.value = "";
+  emits("update:modelValue", "");
+};
+const handlePassword = () => {
+  // props.type = "text";
+  passwordVisible.value = !passwordVisible.value;
 };
 </script>
 <script lang="ts">
@@ -119,11 +132,3 @@ export default {
   }
 }
 </style>
-
-function emits(arg0: string, value: any) {
-  throw new Error('Function not implemented.');
-}
-
-function emits(arg0: string): any {
-  throw new Error('Function not implemented.');
-}

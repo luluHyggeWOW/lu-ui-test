@@ -67,8 +67,20 @@
   </div> -->
   <div class="input">
     <lu-input placeholder="请输入用户名" type="password" disabled></lu-input>
-    <lu-input v-model="text" width="20%" clearable> </lu-input>
-    <lu-input v-model="text" width="20%" type="password" show-password> </lu-input>{{text}}
+    <lu-input v-model="text" width="20%" clearable> </lu-input>{{text}}
+    <lu-input v-model="pw" width="20%" type="password" show-password> </lu-input>{{pw}}
+  </div>
+  <div class="switch">
+    <lu-switch v-model="active"></lu-switch>
+    <lu-switch v-model="active" active-color="red" inactive-color="green"></lu-switch>
+    <input type="text" v-model="active">
+  </div>
+  <div class="radio">
+    <lu-radio-group v-model="gender">
+      <lu-radio label="1">男</lu-radio>
+      <lu-radio label="0">女</lu-radio>
+      <lu-radio label="1">11</lu-radio>
+    </lu-radio-group>
   </div>
 </template>
 
@@ -76,6 +88,9 @@
 import { ref } from "vue";
 let dialogVisible = ref(false);
 let text = ref("");
+let pw = ref("");
+let active = ref(false);
+let gender = ref(1);
 const handleClose = (val: boolean) => {
   dialogVisible.value = val;
 };
