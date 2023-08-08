@@ -2,7 +2,7 @@
   <label class="lu-radio" :class="{'is-checked': label == model}">
     <span class="lu-radio_input">
       <span class="lu-radio_inner"></span>
-      <input type="radio" class="lu-radio_original" :modelValue="label" v-model="model">
+      <input type="radio" class="lu-radio_original" :name="name" :modelValue="label" v-model="model">
     </span>
     <span class="lu-radio_label">
       <slot></slot>
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, useSlots, defineProps, computed } from "vue";
+import { onMounted, ref, useSlots, defineProps, computed, inject } from "vue";
 const props = defineProps({
   label: {
     type: [String, Number, Boolean],
@@ -28,14 +28,22 @@ const props = defineProps({
 const emits = defineEmits(["update:modelValue"]);
 const model = computed({
   get() {
-    return props.modelValue;
+    return isGroup() ? radioGroupValue.modelValue : props.modelValue;
   },
   set() {
-    emits("update:modelValue", props.label);
+    isGroup()
+      ? changeradioGroupValue(props.label)
+      : emits("update:modelValue", props.label);
   },
 });
 
-onMounted(() => {});
+const radioGroupValue = inject("RadioGroup", {
+  modelValue: "",
+});
+const changeradioGroupValue: any = inject("ChangeRadio");
+const isGroup = () => {
+  return radioGroupValue.modelValue != "";
+};
 </script>
 <script lang="ts">
 export default {

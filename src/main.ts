@@ -6,14 +6,18 @@ import LuInput from '@/components/input.vue'
 import LuSwitch from '@/components/switch.vue'
 import LuRadio from '@/components/radio.vue'
 import LuRadioGroup from '@/components/radio-group.vue'
+import LuCheckbox from '@/components/checkbox.vue'
+import LuCheckboxGroup from '@/components/checkbox-group.vue'
 import '@/assets/fonts/iconfont.css'
 const app = createApp(App);
 
-app.component('lu-button', LuButton);
-app.component('lu-dialog', LuDialog);
-app.component('lu-input', LuInput);
-app.component('lu-switch', LuSwitch);
-app.component('lu-radio', LuRadio);
-app.component('lu-radio-group', LuRadioGroup);
+app.component(LuButton.name, LuButton);
+app.component(LuDialog.name, LuDialog);
+app.component(LuInput.name, LuInput);
+app.component(LuSwitch.name, LuSwitch);
+app.component(LuRadio.name, LuRadio);
+app.component(LuRadioGroup.name, LuRadioGroup);
+app.component(LuCheckbox.name, LuCheckbox);
+app.component(LuCheckboxGroup.name, LuCheckboxGroup);
 
 app.mount('#app');

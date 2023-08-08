@@ -1,5 +1,5 @@
 <template>
-  <div class="lu-radio-group">
+  <div class="lu-checkbox-group">
     <slot></slot>
   </div>
 </template>
@@ -13,17 +13,17 @@ const emits = defineEmits(["update:modelValue"]);
 const change = (val: any) => {
   emits("update:modelValue", val);
 };
-provide("ChangeRadio", change);
+provide("ChangeCheckbox", change);
 </script>
 
 <style >
 </style>
 <script lang="ts">
 export default {
-  name: "luRadioGroup",
+  name: "luCheckboxGroup",
   provide() {
     return {
-      RadioGroup: this,
+      CheckboxGroup: this,
     };
   },
 };

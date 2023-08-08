@@ -1,8 +1,10 @@
 <template>
   <div class="lu-input lu-input_suffix" :class="{'lu-input_suffix':showSuffix}" :style="{width:width}">
-    <input :type="showPassword?(passwordVisible?'text':'password'):type" :placeholder="placeholder" :disabled="disabled"
-      :name="name" class="lu-input_inner" :modelValue="modelValue" @input="handleInput($event)"
-      :class="[{'is-disabled':disabled}]">
+    <form>
+      <input :type="showPassword?(passwordVisible?'text':'password'):type" :placeholder="placeholder"
+        :disabled="disabled" :name="name" class="lu-input_inner" :modelValue="modelValue" @input="handleInput($event)"
+        :class="[{'is-disabled':disabled}]" :autocomplete="passwordVisible?'':'new-password'">
+    </form>
     <span class="lu-input_suffix" v-if="showSuffix">
       <i class="on-input_icon lu-icon-cancel" v-if="clearable && modelValue" @click.stop="clear($event)"></i>
       <i class="on-input_icon lu-icon-visible" v-if="showPassword && type=='password'" @click="handlePassword"></i>

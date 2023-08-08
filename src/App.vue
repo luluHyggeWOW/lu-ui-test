@@ -76,21 +76,34 @@
     <input type="text" v-model="active">
   </div>
   <div class="radio">
+    <lu-radio label="1" v-model="gender">男</lu-radio>
+    <lu-radio label="0" v-model="gender">女</lu-radio>
+    <lu-radio label="1" v-model="gender">11</lu-radio>
     <lu-radio-group v-model="gender">
       <lu-radio label="1">男</lu-radio>
       <lu-radio label="0">女</lu-radio>
       <lu-radio label="1">11</lu-radio>
     </lu-radio-group>
   </div>
+  <div class="checkbox">
+    <lu-checkbox v-model="active">111</lu-checkbox>
+    <br>
+    <lu-checkbox-group v-model="hobby">
+      <lu-checkbox label="1"></lu-checkbox>
+      <lu-checkbox label="2"></lu-checkbox>
+      <lu-checkbox label="3"></lu-checkbox>
+    </lu-checkbox-group>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 let dialogVisible = ref(false);
 let text = ref("");
 let pw = ref("");
 let active = ref(false);
 let gender = ref(1);
+let hobby = ref([1, 2, 3]);
 const handleClose = (val: boolean) => {
   dialogVisible.value = val;
 };
